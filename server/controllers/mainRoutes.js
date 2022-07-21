@@ -12,10 +12,10 @@ router.route("/post").post(async (req, res) => {
 }); 
 */
 
-router.post("/post", async (req, res) => {
-  const { when, user, room, body } = req.body;
+router.post("/new-message", async (req, res) => {
+  const { date, user, room, body } = req.body;
   try {
-    if (!when || !user || !room || !body) {
+    if (!date || !user || !room || !body) {
       res.status(406).json({
         //specific error
         status: "Failed. Insufficient data.",
@@ -23,7 +23,7 @@ router.post("/post", async (req, res) => {
     } else {
       // create new instance of model schema and pass an object that binds each req.body property to the svhema properties. Wrap it into a variable (newOwner).
       const newMessage = new Message({
-        when: when,
+        date: date,
         user: user,
         room: room,
         body: body,
@@ -33,7 +33,7 @@ router.post("/post", async (req, res) => {
 
       res.status(200).json({
         status: "Message received:",
-        when: when,
+        date: date,
         user: user,
         room: room,
         body: body,

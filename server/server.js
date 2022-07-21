@@ -1,18 +1,16 @@
 require("dotenv").config();
 
 const Express = require("express"),
-  //cors = require("cors"),
   mongoose = require("mongoose"), // Import mongoose
+  cors = require("cors"),
   app = Express(),
   PORT = process.env.PORT || 8000,
   HOST = process.env.HOST || "127.0.0.1";
 
-//db = require("./db");
-authmiddleware = require("./controllers/mainRoutes");
-
-//app.use(cors());
+mainRoutes = require("./controllers/mainRoutes");
+app.use(cors());
 app.use(Express.json());
-app.use("/api/message", authmiddleware);
+app.use("/api/message", mainRoutes);
 
 mongoose.connect("mongodb://localhost:27017/react-chat", {
   useNewUrlParser: true,
