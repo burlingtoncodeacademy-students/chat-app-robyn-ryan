@@ -1,5 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Home from './components/Home/Home'
+import Cars from './components/Cars/Cars'
+import OuterSpace from "./components/OuterSpace/OuterSpace";
 import "./App.css";
 
 function App() {
@@ -11,9 +14,9 @@ function App() {
         <Link to="/outerspace">Outer Space</Link>
       </nav>
       <Routes>
-        {/* <Route path="/" element={<Main />} /> */}
-        {/* <Route path="/cars" element={<Cars />} /> */}
-        {/* <Route path="/outerspace" element={<OuterSpace />} /> */}
+        <Route path="/" element={<Home />} />
+        <Route path="/cars" element={<Cars />} />
+        <Route path="/outerspace" element={<OuterSpace />} />
       </Routes>
     </Router>
   );
