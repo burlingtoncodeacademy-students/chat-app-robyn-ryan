@@ -4,17 +4,14 @@ function Home(props) {
 
   const [ user, setUser ] = useState("")
   const [ body, setBody ] = useState("")
-  //const [ date, setDate ] = useState("")
 
 async function submitForm(e) {
   e.preventDefault()
   console.log(user)
   console.log(body)
-  //console.log(date)
   console.log(props.room)
   fetch('http://localhost:8000/api/message/new-message', {
     headers: {
-      //'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
       method: "POST",
