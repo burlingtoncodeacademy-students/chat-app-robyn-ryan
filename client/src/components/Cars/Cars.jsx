@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 
-function Cars() {
+function Cars(props) {
   return (
     <div>Cars</div>
   )
