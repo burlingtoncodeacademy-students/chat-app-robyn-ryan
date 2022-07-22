@@ -8,6 +8,19 @@ import "./App.css";
 function App() {
   const [room, setRoom] = useState("main");
 
+  const [allMessages, setAllMessages] = useState([]);
+
+  useEffect(() => {
+    //fetches information from a local API route set up on the server
+    fetch("http://localhost:8000/api/message/all-messages")
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => {
+        setAllMessages(json);
+      });
+  }, []);
+
   return (
     <Router>
       <nav>
@@ -22,9 +35,18 @@ function App() {
         </Link>
       </nav>
       <Routes>
-        <Route path="/" element={<Home room={room} />} />
-        <Route path="/cars" element={<Cars room={room} />} />
-        <Route path="/outerspace" element={<OuterSpace room={room} />} />
+        <Route
+          path="/"
+          element={<Home room={room} allMessages={allMessages} />}
+        />
+        <Route
+          path="/cars"
+          element={<Cars room={room} allMessages={allMessages} />}
+        />
+        <Route
+          path="/outerspace"
+          element={<OuterSpace room={room} allMessages={allMessages} />}
+        />
       </Routes>
     </Router>
   );

@@ -26,13 +26,23 @@ async function submitForm(e) {
     .catch(function(res){ console.log(res) })
   }
 
+  
 
   return (
     <div>
+      <div className="message-display">
+      {props.allMessages.map((message) => {
+          return (
+              console.log(message.user, message.date, message.body)
+          )
+        })}
+                  
+
+      </div>
       <form  method="POST" onSubmit={submitForm}>
         <input type="text" placeholder="username" name="user" onChange={(e) => setUser(e.target.value)}/>
         <input type="text" placeholder="message" name="body" onChange={(e) => setBody(e.target.value)}/>
-        <input type="submit" />
+        <button type="submit">Send</button>
       </form>
     </div>
   )
