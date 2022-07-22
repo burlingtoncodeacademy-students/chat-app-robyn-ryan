@@ -7,20 +7,27 @@ import "./App.css";
 
 function App() {
   const [room, setRoom] = useState("main");
-
+  const [render, setRender] = useState(true)
   const [allMessages, setAllMessages] = useState([]);
 
   useEffect(() => {
     //fetches information from a local API route set up on the server
-    fetch("http://localhost:8000/api/message/all-messages")
+    async function getData(){
+      let res = await fetch("http://localhost:8000/api/message/all-messages")
+      let data = await res.json();
+      setAllMessages(data)
+      console.log(data)
+    }
+    getData()
+  }, [setAllMessages, render]);
+    /* fetch("http://localhost:8000/api/message/all-messages")
       .then((res) => {
         return res.json();
       })
-      .then((json) => {
-        setAllMessages(json);
+      .then(data => {
+        setAllMessages(data);
       });
-  }, []);
-
+  } */
   return (
     <Router>
       <nav>
@@ -37,7 +44,7 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={<Home room={room} allMessages={allMessages} />}
+          element={<Home room={room} allMessages={allMessages} setRender={setRender} render={render}/>}
         />
         <Route
           path="/cars"
@@ -52,3 +59,11 @@ function App() {
   );
 }
 export default App;
+
+/* 
+To Do:
+! populate other components
+! filter messages by room
+! format messages
+! css
+*/
