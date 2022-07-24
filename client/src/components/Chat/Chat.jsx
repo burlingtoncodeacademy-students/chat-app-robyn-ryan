@@ -1,21 +1,29 @@
 import React, { useState, useEffect } from 'react'
+import './Chat.css'
 
 function Home(props) {
-  console.log(props.allMessages)
+  console.log(props.roomMessages)
   console.log(props.room)
 
   const [ user, setUser ] = useState("")
   const [ body, setBody ] = useState("")
-  
+  const [render, setRender] = useState(true)
+  const [roomMessages, setRoomMessages] = useState([]);
+
+  useEffect(() => {
+    //fetches information from a local API route set up on the server
+    async function getData(){
+      let res = await fetch(`http://localhost:8000/api/messages/${props.fetchPath}`)
+      let data = await res.json();
+      setRoomMessages(data)
+    }
+    getData()
+  }, [setRoomMessages, render, props.room]);
 
 
 async function submitForm(e) {
   e.preventDefault()
-  console.log(props.render)
-  console.log(user)
-  console.log(body)
-  console.log(props.room)
-  fetch('http://localhost:8000/api/message/new-message', {
+  fetch('http://localhost:8000/api/messages/new-message', {
     headers: {
       'Content-Type': 'application/json'
     },
@@ -29,10 +37,10 @@ async function submitForm(e) {
     })
     .then(function(res){ console.log(res) })
     .catch(function(res){ console.log(res) })
-    if (props.render===true){
-      props.setRender(false)
+    if (render===true){
+      setRender(false)
     } else {
-      props.setRender(true)
+      setRender(true)
     }
   }
 
@@ -41,14 +49,14 @@ async function submitForm(e) {
         <div>
       <table className="message-display">
         <tbody>
-        {props.allMessages.map((message) => {
+        {roomMessages.map((message) => {
           console.log(message.user)
      return (
        <tr key={message._id}>
-         <td>{message.user}</td>
-         <td>{message.date}</td>
+         <td>date: {message.date.slice(0, 10)}<br/>user name: {message.user}</td>
          <td>{message.body}</td>
-         </tr>
+
+        </tr>
      )
         })}
         </tbody>

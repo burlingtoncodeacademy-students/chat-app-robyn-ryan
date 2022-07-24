@@ -1,35 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Home from "./components/Home/Home";
-import Cars from "./components/Cars/Cars";
-import OuterSpace from "./components/OuterSpace/OuterSpace";
+import Chat from "./components/Chat/Chat";
+// import Cars from "./components/Cars/Cars";
+// import OuterSpace from "./components/OuterSpace/OuterSpace";
 import "./App.css";
 
 function App() {
   const [room, setRoom] = useState("main");
-  const [render, setRender] = useState(true)
-  const [allMessages, setAllMessages] = useState([]);
-
-  useEffect(() => {
-    //fetches information from a local API route set up on the server
-    async function getData(){
-      let res = await fetch("http://localhost:8000/api/message/all-messages")
-      let data = await res.json();
-      setAllMessages(data)
-      console.log(data)
-    }
-    getData()
-  }, [setAllMessages, render]);
-    /* fetch("http://localhost:8000/api/message/all-messages")
-      .then((res) => {
-        return res.json();
-      })
-      .then(data => {
-        setAllMessages(data);
-      });
-  } */
+  const [roomName, setRoomName] = useState('')
+  useEffect(()=>{
+    if (room==='cars'){ setRoomName('Car Talk chat room')}
+    else if (room==='outerspace'){ setRoomName('Outer Space chat room')}
+    else { setRoomName('Main chat room')}
+  }, [room])
+    
   return (
     <Router>
+      <h1>You are in the {roomName} </h1>
       <nav>
         <Link to="/" onClick={() => setRoom("main")}>
           Main Chat
@@ -44,15 +31,15 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={<Home room={room} allMessages={allMessages} setRender={setRender} render={render}/>}
+          element={<Chat room={room} fetchPath='main' />}
         />
         <Route
           path="/cars"
-          element={<Cars room={room} allMessages={allMessages} />}
+          element={<Chat room={room} fetchPath='cars' />}
         />
         <Route
           path="/outerspace"
-          element={<OuterSpace room={room} allMessages={allMessages} />}
+          element={<Chat room={room} fetchPath='outerspace' />}
         />
       </Routes>
     </Router>
