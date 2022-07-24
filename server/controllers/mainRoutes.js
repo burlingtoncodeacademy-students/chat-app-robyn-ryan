@@ -46,13 +46,7 @@ router.post("/new-message", async (req, res) => {
     });
   }
 });
-
-// all GET route that sends just a random response
-// router.get("/all-messages", async (req, res) => {
-//   let allMessages = await Message.find({});
-//   res.send(allMessages)
-// });
-
+// Get data based on room using "find" method with a room filter
 router.get('/main', async (req, res) => {
   let allMessages = await Message.find({room:'main'});
   console.log(allMessages)
