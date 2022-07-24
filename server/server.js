@@ -10,7 +10,7 @@ const Express = require("express"),
 mainRoutes = require("./controllers/mainRoutes");
 app.use(cors());
 app.use(Express.json());
-app.use("/api/message", mainRoutes);
+app.use("/api/messages", mainRoutes);
 
 mongoose.connect("mongodb://localhost:27017/react-chat", {
   useNewUrlParser: true,

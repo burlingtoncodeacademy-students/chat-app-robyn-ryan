@@ -48,8 +48,22 @@ router.post("/new-message", async (req, res) => {
 });
 
 // all GET route that sends just a random response
-router.get("/all-messages", async (req, res) => {
-  let allMessages = await Message.find({});
+// router.get("/all-messages", async (req, res) => {
+//   let allMessages = await Message.find({});
+//   res.send(allMessages)
+// });
+
+router.get('/main', async (req, res) => {
+  let allMessages = await Message.find({room:'main'});
+  console.log(allMessages)
+  res.send(allMessages)
+});
+router.get("/outerspace", async (req, res) => {
+  let allMessages = await Message.find({room:'outerspace'});
+  res.send(allMessages)
+});
+router.get("/cars", async (req, res) => {
+  let allMessages = await Message.find({room:'cars'});
   res.send(allMessages)
 });
 
