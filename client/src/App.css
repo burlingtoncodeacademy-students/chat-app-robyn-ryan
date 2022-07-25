@@ -1,8 +1,9 @@
+/* Fonts are universal */
 * {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-/* IDs for the grid layout */
+/* IDs for the grid layout, including background colors*/
 #wrapper {
     display: grid;
     grid-template-columns: 130px auto;
@@ -32,12 +33,12 @@
     grid-row: 4 / 6;
 }
   
-#message-display { /* Allow scrolling for messages display */
+#message-display { 
     grid-column: 2 / 3;
     grid-row: 3 / 5;
-    overflow-y: auto;
+    overflow-y: auto; /* Allow scrolling for messages display */
     background-color: #d9d9d9;
-    display:flex; 
+    display:flex; /* Fefault is scroll to bottom */
     flex-direction:column-reverse;
     align-items: flex-start;
 }
@@ -53,7 +54,7 @@
 
 /* Other styles: */
 
-h1 {
+h1 { /* Main heading is on all pages */
     font-weight: 50;
     font-size: 18pt;
     padding-top: 10px;
@@ -64,7 +65,7 @@ h1 {
     margin: 0;
 }
 
-h2 {
+h2 { /* h2 heading is on all pages and text changes based on "page" */
     font-weight: 50;
     font-size: 14pt;
     padding: 5px 0 0 20px;
@@ -74,7 +75,7 @@ h2 {
     margin: 0;
 }
 
-nav {
+nav { /* Nav is vertical */
     min-height: 200px;
     display: flex;
     flex-direction: column;
@@ -82,18 +83,18 @@ nav {
     margin: 0;
 }
 
-a {
+a { /* This is for navlinks */
     margin: 8px;
     text-decoration: none;
     text-transform: uppercase;
     color: #cccccc;
 }
 
-a:hover {
+a:hover { /* This is for navlinks */
     color: #fbf674;
 }
 
-img {
+img {  /* This is for the advertisement */
     width: 130px;
     height: 140px;
 }

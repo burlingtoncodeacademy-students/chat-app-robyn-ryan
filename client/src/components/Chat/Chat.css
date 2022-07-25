@@ -1,9 +1,9 @@
-td {
+td { /* The table for the messages display has text to aligned to bottom and padding */
     padding: 5px;
     vertical-align: bottom;
 }
 
-button {
+button { /* The "send" button for the message input form */
     border: none;
     border-radius: 5px;
     width: 75px;
@@ -12,16 +12,16 @@ button {
     color: #fbf674; 
 }
 
-form {
+form { /* The message input form */
     margin: 20px 0 0 5px;
 }
 
-input {
+input { /* The input fields for the message input form */
     height: 30px;
     border-radius: 5px;
     margin: 0 5px 5px 0;
 }
 
-.message-input {
+.message-input { /* The "message" input field in the form */
     width: 300px;
 }

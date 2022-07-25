@@ -1,17 +1,10 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
+// Import the model
 const MessageSchema = require("../models/Message");
 const Message = mongoose.model("messages", MessageSchema);
 
-// login route
-/* 
-router.route("/post").post(async (req, res) => {
-  const { when, user, room, body } = req.body;
-  console.log(when, user, room, body);
-  res.send("register route hit");
-}); 
-*/
-
+// Post a new message (including error handling)
 router.post("/new-message", async (req, res) => {
   const { date, user, room, body } = req.body;
   try {
@@ -21,13 +14,14 @@ router.post("/new-message", async (req, res) => {
         status: "Failed. Insufficient data.",
       });
     } else {
-      // create new instance of model schema and pass an object that binds each req.body property to the svhema properties. Wrap it into a variable (newOwner).
+      // create new instance of model schema and pass an object that binds each req.body property to the schema properties. Wrap it into a variable (newMessage).
       const newMessage = new Message({
         date: date,
         user: user,
         room: room,
         body: body,
       });
+
       // Save entry to collection in database
       await newMessage.save();
 
@@ -46,19 +40,18 @@ router.post("/new-message", async (req, res) => {
     });
   }
 });
-// Get data based on room using "find" method with a room filter
-router.get('/main', async (req, res) => {
-  let allMessages = await Message.find({room:'main'});
-  console.log(allMessages)
-  res.send(allMessages)
+// Get data based on "room" using the .find() method with a room filter
+router.get("/main", async (req, res) => {
+  let allMessages = await Message.find({ room: "main" });
+  res.send(allMessages);
 });
 router.get("/outerspace", async (req, res) => {
-  let allMessages = await Message.find({room:'outerspace'});
-  res.send(allMessages)
+  let allMessages = await Message.find({ room: "outerspace" });
+  res.send(allMessages);
 });
 router.get("/cars", async (req, res) => {
-  let allMessages = await Message.find({room:'cars'});
-  res.send(allMessages)
+  let allMessages = await Message.find({ room: "cars" });
+  res.send(allMessages);
 });
 
 module.exports = router;
