@@ -19,7 +19,6 @@ function Home(props) {
     }
     getData();
   }, [render, props.fetchPath]);
-
   
 
   //fetchPath is the only 'stable' room-based variable; to avoid resetting header and room on refresh, attach them to fetchPath, which is attached to the page's path
@@ -89,26 +88,29 @@ function Home(props) {
     
   }
 
-  return (
-    <div>
+     
+    return (
+    <>
+    <div id="message-display">
       <table className="message-display">
         <tbody>
-          {roomMessages.map((message) => {
-            return (
-              <tr key={message._id}>
-                <td>
-                  {getDate(message.date)}
+        {roomMessages.map((message) => {
+        return (
+          <tr key={message._id}>
+            <td>
+                  <span style={{color: "#003049"}}>{getDate(message.date)}</span>
                   <br />
-                  user name: {message.user}
+                  <span style={{color: "#335c67"}}>user name: {message.user}</span>
                 </td>
                 <td>{message.body}</td>
-              </tr>
-            );
-          })}
+            </tr>
+     );
+        })}
         </tbody>
       </table>
-
-      <form method="POST" onSubmit={submitForm}>
+      </div>
+      <div id="message-input">
+         <form method="POST" onSubmit={submitForm}>
         <input
           type="text"
           placeholder="username"
@@ -116,15 +118,17 @@ function Home(props) {
           onChange={(e) => setUser(e.target.value)}
         />
         <input
+          className="message-input"
           type="text"
           placeholder="message"
           name="body"
           onChange={(e) => setBody(e.target.value)}
         />
         <button type="submit">Send</button>
-      </form>
-    </div>
-  );
+       </form>
+     </div>
+     </>
+     );
 }
 
 export default Home;

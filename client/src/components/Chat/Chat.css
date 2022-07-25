@@ -1,3 +1,27 @@
-td{
+td {
     padding: 5px;
+    vertical-align: bottom;
+}
+
+button {
+    border: none;
+    border-radius: 5px;
+    width: 75px;
+    height: 30px;
+    background-color: #5c6378;
+    color: #fbf674; 
+}
+
+form {
+    margin: 20px 0 0 5px;
+}
+
+input {
+    height: 30px;
+    border-radius: 5px;
+    margin: 0 5px 5px 0;
+}
+
+.message-input {
+    width: 300px;
 }
