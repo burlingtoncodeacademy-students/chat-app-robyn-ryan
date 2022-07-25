@@ -3,7 +3,7 @@ td { /* The table for the messages display has text to aligned to bottom and pad
     vertical-align: bottom;
 }
 
-.user-time {
+.user-time { /* Right-align date & username display */
     text-align: end;
 }
 
