@@ -3,7 +3,6 @@ import "./Chat.css";
 
 function Home(props) {
 
- 
   const [user, setUser] = useState("");
   const [body, setBody] = useState("");
   const [render, setRender] = useState(true);
