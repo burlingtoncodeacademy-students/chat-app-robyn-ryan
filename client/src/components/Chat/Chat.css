@@ -1,6 +1,10 @@
 td { /* The table for the messages display has text to aligned to bottom and padding */
-    padding: 5px;
+    padding: 5px 10px 5px 5px;
     vertical-align: bottom;
+}
+
+.user-time {
+    text-align: end;
 }
 
 button { /* The "send" button for the message input form */

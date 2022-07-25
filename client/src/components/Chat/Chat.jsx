@@ -35,7 +35,7 @@ function Home(props) {
 
   // This gathers the form input when "send" button is clicked and posts the message data to the database
   async function submitForm(e) {
-    e.preventDefault();
+    e.preventDefault(); // stops default reload
     e.target.reset(); // clear user input on submit
     fetch("http://localhost:8000/api/messages/new-message", {
       headers: {
@@ -64,7 +64,7 @@ function Home(props) {
   function getDate(date) {
     const today = new Date(); // Today's date
     const newDate = new Date(date); // Date of message
-    let timeFrame = "am";
+    let timeFrame = "AM";
     let minutes = newDate.getMinutes(); // Formatting for minutes
     if (minutes<10){
       minutes = '0' + minutes;
@@ -72,7 +72,7 @@ function Home(props) {
     let hours = newDate.getHours(); // Formatting for hours
     if (hours > 12) {
       hours = hours - 12;
-      timeFrame = "pm";
+      timeFrame = "PM";
     }
     if ( // If the message was submitted today, do not show month/day
       newDate.getDate() === today.getDate() &&
@@ -86,6 +86,8 @@ function Home(props) {
     }    
   }
 
+  // TODO: Add a function that will scroll down when a new message is added.
+
     return (
     <>
 
@@ -97,11 +99,11 @@ function Home(props) {
         {roomMessages.map((message) => {
           return (
             <tr key={message._id}>
-              <td>
+              <td className="user-time">
                     {/* Inline styles for the date and user name */}
-                    <span style={{color: "#003049"}}>{getDate(message.date)}</span>
+                    <span style={{color: "#003049", fontSize: "9pt"}}>{getDate(message.date)}</span>
                     <br />
-                    <span style={{color: "#335c67"}}>user name: {message.user}</span>
+                    <span style={{color: "#335c67"}}>{message.user}</span>
                   </td>
                 <td>{message.body}</td>
             </tr>
