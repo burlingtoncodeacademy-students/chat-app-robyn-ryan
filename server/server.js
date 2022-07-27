@@ -6,13 +6,17 @@ const Express = require("express"),
   app = Express(),
   PORT = process.env.PORT || 8000,
   HOST = process.env.HOST || "127.0.0.1";
+  UN = process.env.UN
+  PW = process.env.PW
 
 mainRoutes = require("./controllers/mainRoutes");
 app.use(cors());
 app.use(Express.json());
 app.use("/api/messages", mainRoutes);
 
-mongoose.connect("mongodb://localhost:27017/react-chat", {
+//mongoose.connect("mongodb://localhost:27017/react-chat",
+
+mongoose.connect(`mongodb+srv://${UN}:${PW}@cluster0.emgkbsh.mongodb.net/?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
