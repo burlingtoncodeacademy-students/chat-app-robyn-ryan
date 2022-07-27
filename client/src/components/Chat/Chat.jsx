@@ -68,7 +68,7 @@ function Home(props) {
         }
       })
       .catch(function (res) {
-        window.alert(`Your message was too long`)
+        console.log(res)
       });
   }
 
