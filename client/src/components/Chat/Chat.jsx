@@ -16,12 +16,11 @@ function Home(props) {
       } else {
         setRender(true);
       }
-      console.log('render')
     }, 5000);
     return () => clearInterval(renderInterval);
   }, [render])
 
-   //fetches information from a local API route set up on the server; fetchPath declared in the router in App.js
+  //fetches information from a local API route set up on the server; fetchPath declared in the router in App.js
   useEffect(() => {
     async function getData() {
       let res = await fetch(
@@ -69,18 +68,19 @@ function Home(props) {
         }
       })
       .catch(function (res) {
+        window.alert(`Your message was too long`)
       });
   }
-  
+
   // Transforms the date into a user-friendly format
   function getDate(date) {
     const today = new Date(); // Today's date
     const newDate = new Date(date); // Date of message
     let timeFrame = "AM";
     let minutes = newDate.getMinutes(); // Formatting for minutes
-    if (minutes<10){
+    if (minutes < 10) {
       minutes = '0' + minutes;
-    } 
+    }
     let hours = newDate.getHours(); // Formatting for hours
     if (hours > 12) {
       hours = hours - 12;
@@ -91,61 +91,59 @@ function Home(props) {
       newDate.getMonth() === today.getMonth()
     ) {
       return `${hours}:${minutes} ${timeFrame}`;
-    } 
+    }
     else { // If the message was NOT submitted today, show month/day
       let day = `${newDate.getMonth()}/${newDate.getDate()}`;
       return `${day} ${hours}:${minutes} ${timeFrame}`;
-    }    
+    }
   }
 
-  // TODO: Add a function that will scroll down when a new message is added.
-
-    return (
+  return (
     <>
 
-    {/* Display the received messages */}
-    <div id="message-display">
-      <table className="message-display">
-        <tbody>
-        {/* Map over the messages and display them in a table */}
-        {roomMessages.map((message) => {
-          return (
-            <tr key={message._id}>
-              <td className="user-time">
+      {/* Display the received messages */}
+      <div id="message-display">
+        <table className="message-display">
+          <tbody>
+            {/* Map over the messages and display them in a table */}
+            {roomMessages.map((message) => {
+              return (
+                <tr key={message._id}>
+                  <td className="user-time">
                     {/* Inline styles for the date and user name */}
-                    <span style={{color: "#003049", fontSize: "9pt"}}>{getDate(message.date)}</span>
+                    <span style={{ color: "#003049", fontSize: "9pt" }}>{getDate(message.date)}</span>
                     <br />
-                    <span style={{color: "#335c67"}}>{message.user}</span>
+                    <span style={{ color: "#335c67" }}>{message.user}</span>
                   </td>
-                <td>{message.body}</td>
-            </tr>
-          );
-        })}
-        </tbody>
-      </table>
-    </div>
+                  <td>{message.body}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
 
-    {/* Form for inputing a new message */}
-    <div id="message-input">
-      <form method="POST" onSubmit={submitForm}>
-        <input
-          type="text"
-          placeholder="username"
-          name="user"
-          onChange={(e) => setUser(e.target.value)}
-          required
-        />
-        <input
-          className="message-input"
-          type="text"
-          placeholder="message"
-          name="body"
-          onChange={(e) => setBody(e.target.value)}
-          required
-        />
-        <button type="submit">Send</button>
-      </form>
-    </div>
+      {/* Form for inputing a new message */}
+      <div id="message-input">
+        <form method="POST" onSubmit={submitForm}>
+          <input
+            type="text"
+            placeholder="username"
+            name="user"
+            onChange={(e) => setUser(e.target.value)}
+            required
+          />
+          <input
+            className="message-input"
+            type="text"
+            placeholder="message"
+            name="body"
+            onChange={(e) => setBody(e.target.value)}
+            required
+          />
+          <button type="submit">Send</button>
+        </form>
+      </div>
     </>
   );
 }

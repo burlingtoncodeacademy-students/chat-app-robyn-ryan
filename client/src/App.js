@@ -103,7 +103,7 @@ function App() {
 
         {/* The advertisement image display */}
         <div id="ad">
-          <img src={ad} alt="ad image" />
+          <img src={ad} alt="advertisement" />
         </div>
 
         <Routes>

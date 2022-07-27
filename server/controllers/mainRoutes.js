@@ -14,12 +14,13 @@ router.post("/new-message", async (req, res) => {
         status: "Failed. Insufficient data.",
       });
     } else {
+      try {
       // create new instance of model schema and pass an object that binds each req.body property to the schema properties. Wrap it into a variable (newMessage).
       const newMessage = new Message({
         date: date,
         user: user,
         room: room,
-        body: body,
+        body: body
       });
 
       // Save entry to collection in database
@@ -32,7 +33,10 @@ router.post("/new-message", async (req, res) => {
         room: room,
         body: body,
       });
+    } catch (error) {
+      res.send(`Your message is too long`)
     }
+  }
   } catch (error) {
     // general error
     res.status(500).json({

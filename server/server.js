@@ -5,7 +5,6 @@ const Express = require("express"),
   cors = require("cors"),
   app = Express(),
   PORT = process.env.PORT || 8000,
-  HOST = process.env.HOST || "127.0.0.1";
   UN = process.env.UN
   PW = process.env.PW
 
@@ -27,9 +26,9 @@ db.on("error", console.error.bind(console, "connection-error"));
 
 const Message = require("./models/Message");
 
-app.listen(PORT, HOST, () => {
+app.listen(PORT, () => {
   try {
-    console.log(`Server running on ${HOST}:${PORT}`);
+    console.log(`Server running on ${PORT}`);
   } catch (err) {
     console.log(`Server error: ${err}`);
   }
