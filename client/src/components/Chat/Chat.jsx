@@ -8,6 +8,19 @@ function Home(props) {
   const [render, setRender] = useState(true);
   const [roomMessages, setRoomMessages] = useState([]);
 
+  //sets interval for re-render so that user can see messages sent by others even if they are not actively sending messages to trigger re-render onSubmit
+  useEffect(() => {
+    let renderInterval = setInterval(() => {
+      if (render === true) {
+        setRender(false);
+      } else {
+        setRender(true);
+      }
+      console.log('render')
+    }, 5000);
+    return () => clearInterval(renderInterval);
+  }, [render])
+
    //fetches information from a local API route set up on the server; fetchPath declared in the router in App.js
   useEffect(() => {
     async function getData() {
