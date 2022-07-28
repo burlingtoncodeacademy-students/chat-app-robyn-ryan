@@ -1,35 +1,82 @@
-td { /* The table for the messages display has text to aligned to bottom and padding */
+td {
+    /* The table for the messages display has text to aligned to bottom and padding */
     padding: 5px 10px 5px 5px;
     vertical-align: bottom;
 }
 
-.user-time { /* Right-align date & username display */
+.user-time {
+    /* Right-align date & username display */
     text-align: end;
 }
 
-button { /* The "send" button for the message input form */
+button {
+    /* The "send" button for the message input form */
     border: none;
     border-radius: 5px;
     width: 75px;
     height: 30px;
     background-color: #5c6378;
-    color: #fbf674; 
+    color: #fbf674;
 }
 
-form { /* The message input form */
+form {
+    /* The message input form uses display flex row to keep fields in a row */
     margin: 20px 0 0 5px;
+    display: flex;
+    flex-direction: row;
 }
 
-input { /* The input fields for the message input form */
+@media screen and (max-width: 700px) {
+
+    /* Column layout for smaller screens */
+    form {
+        margin: 20px 0 0 5px;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+#username-input-container {
+    /* Align inputs and character counts */
+    display: flex;
+    flex-direction: column;
+}
+
+#message-input-container {
+    /* Align inputs and character counts */
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    /* The input fields for the message input form */
     height: 30px;
     border-radius: 5px;
     margin: 0 5px 5px 0;
 }
 
-.message-input { /* The "message" input field in the form */
+.username-input {
+    /* The "message" input field in the form */
+    width: 200px;
+}
+
+.message-input {
+    /* The "message" input field in the form */
     width: 300px;
 }
-#char-count{
+
+.char-count {
+    /* Style for the character counts beneath username and message input fields */
     text-align: right;
     color: gray;
+    font-size: 10pt;
+}
+
+@media screen and (max-width: 700px) {
+
+    /* Character counts left-aligned when using column layout for smaller screens */
+    .char-count {
+        text-align: left;
+        margin: 0 0 5px 0;
+    }
 }

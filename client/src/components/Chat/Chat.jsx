@@ -6,8 +6,10 @@ function Home(props) {
   const [body, setBody] = useState("");
   const [render, setRender] = useState(true);
   const [roomMessages, setRoomMessages] = useState([]);
+  const [uCharacterCount, setUCharacterCount] = useState(0);
   const [characterCount, setCharacterCount] = useState(0);
-  const charMax = 15;
+  const charMax = 500;
+  const uCharMax = 15;
 
   //sets interval for re-render so that user can see messages sent by others even if they are not actively sending messages to trigger re-render onSubmit
   useEffect(() => {
@@ -130,28 +132,40 @@ function Home(props) {
       {/* Form for inputing a new message */}
       <div id="message-input">
         <form method="POST" onSubmit={submitForm}>
-          <input
-            type="text"
-            placeholder="username"
-            name="user"
-            onChange={(e) => setUser(e.target.value)}
-            required
-          />
-          <input
-            className="message-input"
-            type="text"
-            placeholder="message"
-            name="body"
-            maxLength={charMax}
-            onChange={(e) => {
-              setBody(e.target.value);
-              setCharacterCount(e.currentTarget.value.length);
-            }}
-            required 
-          />
-          <span id="char-count">
-          {characterCount} of {charMax}
-        </span>
+          <div id="username-input-container">
+            <input
+              className="username-input"
+              type="text"
+              placeholder="username"
+              name="user"
+              maxLength={uCharMax}
+              onChange={(e) => {
+                setUser(e.target.value)
+                setUCharacterCount(e.currentTarget.value.length)
+              }}
+              required
+            />
+            <span className="char-count">
+              {uCharacterCount} of {uCharMax}
+            </span>
+          </div>
+          <div id="message-input-container">
+            <input
+              className="message-input"
+              type="text"
+              placeholder="message"
+              name="body"
+              maxLength={charMax}
+              onChange={(e) => {
+                setBody(e.target.value);
+                setCharacterCount(e.currentTarget.value.length);
+              }}
+              required
+            />
+            <span className="char-count">
+              {characterCount} of {charMax}
+            </span>
+          </div>
           <button type="submit">Send</button>
         </form>
       </div>

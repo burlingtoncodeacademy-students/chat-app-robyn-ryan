@@ -8,7 +8,6 @@ const Message = new mongoose.Schema({
   user: {
     type: String,
     required: true,
-    minLength: [2, 'Must be at least 2 characters.'],
     maxLength: [15, 'Must be 15 characters or less.']
   },
   room: {
