@@ -8,8 +8,8 @@ function Home(props) {
   const [roomMessages, setRoomMessages] = useState([]);
   const [uCharacterCount, setUCharacterCount] = useState(0);
   const [characterCount, setCharacterCount] = useState(0);
-  const charMax = 500;
-  const uCharMax = 15;
+  const charMax = 500; // Username character limit
+  const uCharMax = 15; // Message character limit
 
   //sets interval for re-render so that user can see messages sent by others even if they are not actively sending messages to trigger re-render onSubmit
   useEffect(() => {
@@ -138,9 +138,12 @@ function Home(props) {
               type="text"
               placeholder="username"
               name="user"
+              // Max characters allowed for username
               maxLength={uCharMax}
               onChange={(e) => {
+                // Store the username
                 setUser(e.target.value)
+                // Count the characters for user to see
                 setUCharacterCount(e.currentTarget.value.length)
               }}
               required
@@ -157,7 +160,9 @@ function Home(props) {
               name="body"
               maxLength={charMax}
               onChange={(e) => {
+                // Store the message body
                 setBody(e.target.value);
+                // Count the characters for user to see
                 setCharacterCount(e.currentTarget.value.length);
               }}
               required
