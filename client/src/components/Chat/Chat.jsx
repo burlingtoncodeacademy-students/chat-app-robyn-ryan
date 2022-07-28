@@ -51,6 +51,8 @@ function Home(props) {
   async function submitForm(e) {
     e.preventDefault(); // stops default reload
     e.target.reset(); // clear user input on submit
+    setCharacterCount(0)
+    setUCharacterCount(0)
     fetch("http://localhost:8000/api/messages/new-message", {
       headers: {
         "Content-Type": "application/json",
