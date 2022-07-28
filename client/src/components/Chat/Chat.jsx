@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import "./Chat.css";
 
 function Home(props) {
-
   const [user, setUser] = useState("");
   const [body, setBody] = useState("");
   const [render, setRender] = useState(true);
   const [roomMessages, setRoomMessages] = useState([]);
+  const [characterCount, setCharacterCount] = useState(0);
+  const charMax = 15;
 
   //sets interval for re-render so that user can see messages sent by others even if they are not actively sending messages to trigger re-render onSubmit
   useEffect(() => {
@@ -18,7 +19,7 @@ function Home(props) {
       }
     }, 5000);
     return () => clearInterval(renderInterval);
-  }, [render])
+  }, [render]);
 
   //fetches information from a local API route set up on the server; fetchPath declared in the router in App.js
   useEffect(() => {
@@ -60,7 +61,8 @@ function Home(props) {
         room: props.room, // From the "room" passed in through props from App.js
       }),
     })
-      .then(function (res) { // Wait for fetch, then re-render message display
+      .then(function (res) {
+        // Wait for fetch, then re-render message display
         if (render === true) {
           setRender(false);
         } else {
@@ -68,7 +70,7 @@ function Home(props) {
         }
       })
       .catch(function (res) {
-        console.log(res)
+        console.log(res);
       });
   }
 
@@ -79,20 +81,21 @@ function Home(props) {
     let timeFrame = "AM";
     let minutes = newDate.getMinutes(); // Formatting for minutes
     if (minutes < 10) {
-      minutes = '0' + minutes;
+      minutes = "0" + minutes;
     }
     let hours = newDate.getHours(); // Formatting for hours
     if (hours > 12) {
       hours = hours - 12;
       timeFrame = "PM";
     }
-    if ( // If the message was submitted today, do not show month/day
+    if (
+      // If the message was submitted today, do not show month/day
       newDate.getDate() === today.getDate() &&
       newDate.getMonth() === today.getMonth()
     ) {
       return `${hours}:${minutes} ${timeFrame}`;
-    }
-    else { // If the message was NOT submitted today, show month/day
+    } else {
+      // If the message was NOT submitted today, show month/day
       let day = `${newDate.getMonth()}/${newDate.getDate()}`;
       return `${day} ${hours}:${minutes} ${timeFrame}`;
     }
@@ -100,7 +103,6 @@ function Home(props) {
 
   return (
     <>
-
       {/* Display the received messages */}
       <div id="message-display">
         <table className="message-display">
@@ -111,7 +113,9 @@ function Home(props) {
                 <tr key={message._id}>
                   <td className="user-time">
                     {/* Inline styles for the date and user name */}
-                    <span style={{ color: "#003049", fontSize: "9pt" }}>{getDate(message.date)}</span>
+                    <span style={{ color: "#003049", fontSize: "9pt" }}>
+                      {getDate(message.date)}
+                    </span>
                     <br />
                     <span style={{ color: "#335c67" }}>{message.user}</span>
                   </td>
@@ -138,9 +142,16 @@ function Home(props) {
             type="text"
             placeholder="message"
             name="body"
-            onChange={(e) => setBody(e.target.value)}
-            required
+            maxLength={charMax}
+            onChange={(e) => {
+              setBody(e.target.value);
+              setCharacterCount(e.currentTarget.value.length);
+            }}
+            required 
           />
+          <span id="char-count">
+          {characterCount} of {charMax}
+        </span>
           <button type="submit">Send</button>
         </form>
       </div>

@@ -29,3 +29,7 @@ input { /* The input fields for the message input form */
 .message-input { /* The "message" input field in the form */
     width: 300px;
 }
+#char-count{
+    text-align: right;
+    color: gray;
+}
